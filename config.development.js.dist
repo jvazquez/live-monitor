@@ -1,0 +1,9 @@
+var config = require('./config.global');
+config.env = 'development';
+config.port = 4000;
+config.host = 'live-monitor.node';
+config.use_origins = false;
+config.node_origins = 'localhost';
+config.redis_channel = '';
+config.ui_channel = '';
+module.exports = config;

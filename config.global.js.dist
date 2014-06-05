@@ -1,0 +1,32 @@
+config = module.exports = {};
+
+config.env = 'development';
+/**
+ * Redis
+ */
+config.redis_host = 'localhost';
+config.redis_port = 6379;
+
+/**
+ * Database engine
+ */
+config.db_user = 'put_your_user_here';
+config.db_password = 'put_your_password_here';
+config.db_database = 'put_your_database_name_here';
+config.db_host = 'put_your_database_host_here';
+
+/**
+ * Memcache
+ */
+
+/**
+ * General node settings
+ * Due to the fact that I guess that you will be running all in one single box
+ * We will <strong>NOT</strong> use origins, because we won't restrict nobody
+ * on our local machines
+ */
+config.port = 4000;
+config.address = 'localhost';
+config.use_origins = false;
+config.node_origins = 'localhost';
+module.exports = config;

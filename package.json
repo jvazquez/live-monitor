@@ -1,0 +1,16 @@
+{
+  "name": "live-monitor",
+  "version": "0.0.0",
+  "description": "Live notifications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "redis": "^0.10.3",
+    "socket.io": "^1.0.3",
+    "sprintf": "^0.1.3"
+  }
+}
