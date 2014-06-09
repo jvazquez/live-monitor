@@ -23,6 +23,7 @@
     "underscore": "~1.6.0",
     "bootstrap": "~3.1.1",
     "requirejs": "~2.1.14",
-    "requirejs-text": "~2.0.12"
+    "requirejs-text": "~2.0.12",
+    "jqueryui": "~1.10.4"
   }
 }
