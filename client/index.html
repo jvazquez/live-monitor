@@ -8,20 +8,10 @@
     <meta name="author" content="Jorge Omar Vazquez">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
     <title>Live distributable monitor</title>
-    <!-- script type="text/javascript" src="http://live-monitor.pollux.box/socket.io/socket.io.js"></script>
-    <script>
-  		var socket = io.connect("http://live-monitor.pollux.box");
-  		if(socket){
-  			socket.on('ui_log_feed', function(data){
-  				console.log('Stuff is here', data);
-  			});
-  		}else{
-  			console.log('Socket not ready, sorry');
-  		}
-	</script-->
     <script data-main="scripts/main" src="scripts/js/bower_components/requirejs/require.js"></script>
     <link href="scripts/js/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="scripts/js/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="scripts/js/bower_components/json-human/css/json.human.css" rel="stylesheet"/>
     <!-- Bootstrap core CSS
     Bootstrap theme 
 
@@ -46,8 +36,16 @@
     <div class="container theme-showcase" role="main">
       <div class="jumbotron">
         <h1>Live monitor</h1>
-        <p>Click to obtain messages</p>
+        <p>Click one button to obtain notifications</p>
+        <button type="button" class="btn btn-primary" id="perseus-feed" data-name="Perseus">Perseus</button>
+        <button type="button" class="btn btn-info" id="clean-feed">Clean feeds</button>
       </div>
+      <table class="table table-striped">
+      	<thead>
+      		<tr><th>Feed</th><th id="target-feed"></th></tr>
+      	</thead>
+      	<tbody id="notification-section"></tbody>
+      </table>
     </div>
 </body>
 </html>
