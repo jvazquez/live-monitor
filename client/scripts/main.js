@@ -52,7 +52,8 @@ requirejs([ 'jQuery', 'bootstrap', 'backbone', 'jQueryUi', 'socket', 'json_human
 	}
 
 	$('#perseus-feed').click(function(){
-		$('#target-feed').append($(this).data('name'));
+		$('#target-feed').empty();
+		$('#target-feed').append('Watching ' + $(this).data('name'));
 	});
 
 	$('#clean-feed').click(function(){
