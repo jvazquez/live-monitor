@@ -1,22 +1,35 @@
-define([ 'jQuery', 'backbone', 'socket', 'json_human',
+define([ 'jQuery', 'backbone', 'json_human', 'models/live_feeds/LiveFeedModel',
 		'text!templates/live_feeds/index.html' ], function($, Backbone,
-		JsonHuman, indexTemplate) {
-	var IndexHome = Backbone.View.extend({
+		JsonHuman, LiveFeedModel, indexTemplate) {
+	var IndexFeed = Backbone.View.extend({
 		// el : $("#main-canvas"),
 		events : {
-			'click #perseus-feed' : 'listen_perseus_feeds'
+		// 'click #perseus-feed' : 'listen_perseus_feeds'
 		},
 		delegateEvents : function(events) {
 			this.cid = 'live-feeds-view';
 			Backbone.View.prototype.delegateEvents.call(this, events);
 		},
-		initialize : function() {
-			compiled_template = _.template(indexTemplate);
+		initialize : function(opts) {
+			this.model = opts.model || new LiveFeedModel();
+			this.model.on('change', this.redraw, this);
+			this.redraw();
+		},
+		redraw: function(){
+			console.log('The model has', this.model.toJSON().rawMessage);
+			compiled_template = _.template(indexTemplate,
+					{
+						feed_data : JsonHuman.format(this.model.toJSON().rawMessage).innerHTML
+					});
 			this.render(compiled_template);
 		},
 		render : function(compiled_template) {
-			this.$el.html(compiled_template);
+			if(this.$el.children().length==0){
+				this.$el.html(compiled_template);
+			}else{
+				this.$el.append(compiled_template);
+			}
 		}
 	});
-	return IndexHome;
+	return IndexFeed;
 });
