@@ -104,3 +104,14 @@ app\_I\_want\_to\_log =====> REDIS-BOX <====== nodejs ====> Your browser
 
 __npm__: Npm is used to install nodejs dependencies
 __bower__: Bower is used with grunt if you want for client side javascript depedencies
+
+
+### Disclaimer
+==============
+
+It may not work, so just im me and I will see it.
+
+So far, it has been working in Optimus and I'm setting it up for perseus, on two different hosts
+FreeBSD with a jail (where it started) and a regular ubuntu box
+
+The stesp for freebsd are a tad different, mostly due to tiny things like the real name for node is node, not "nodejs"
