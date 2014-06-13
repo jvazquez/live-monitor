@@ -11,6 +11,8 @@ nginx-full (I know, this is the debian name, in any other distro is just nginx w
 redis-server
 nodejs (>=v0.10.25)
 
+For node dependencies, I'm following this guide, and I'm using the latest ppa
+https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
 
 ## Installation
 ===============
