@@ -88,8 +88,9 @@ If nginx is running and your browser can resolve http://live-monitor-client.alde
 ===================================================
 
 jvazquez@aldebaran:~$ redis-cli
-127.0.0.1:6379> publish php_feed '{"msg": [{"x":1, "y":2}]}'
+127.0.0.1:6379> publish php\_feed '{"msg": [{"x":1, "y":2}]}'
 (integer) 1
+
 
 ## How does the cycle works?
 ============================
@@ -102,10 +103,13 @@ On our installation we have nodejs running and is waiting for redis messages on 
 app\_I\_want\_to\_log =====> REDIS-BOX <====== nodejs ====> Your browser
 
 
-__npm__: Npm is used to install nodejs dependencies
-__bower__: Bower is used with grunt if you want for client side javascript depedencies
+## Why aren't you using memcached?
+==================================
 
-
+So far I don't see any way on how I can make nodejs have an on event for a key on memcache, 
+so I have to click on something to view changes, and that doesnt' seems what I want to do
+on a live version of a log without coding a loop.
+ 
 ### Disclaimer
 ==============
 
@@ -114,4 +118,8 @@ It may not work, so just im me and I will see it.
 So far, it has been working in Optimus and I'm setting it up for perseus, on two different hosts
 FreeBSD with a jail (where it started) and a regular ubuntu box
 
-The stesp for freebsd are a tad different, mostly due to tiny things like the real name for node is node, not "nodejs"
+The steps for freebsd are a tad different, mostly due to tiny things like the real name for node is node, not "nodejs"
+
+__npm__: Npm is used to install nodejs dependencies
+__bower__: Bower is used with grunt if you want for client side javascript depedencies
+

@@ -18,6 +18,8 @@ config.db_host = 'put_your_database_host_here';
 /**
  * Memcache
  */
+config.memcached_host = 'localhost';
+config.memcached_port = 11211;
 
 /**
  * General node settings
