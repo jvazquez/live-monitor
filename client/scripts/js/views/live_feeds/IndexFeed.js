@@ -3,9 +3,6 @@ define([ 'jQuery', 'backbone', 'json_human', 'models/live_feeds/LiveFeedModel',
 		JsonHuman, LiveFeedModel, indexTemplate) {
 	var IndexFeed = Backbone.View.extend({
 		// el : $("#main-canvas"),
-		events : {
-		// 'click #perseus-feed' : 'listen_perseus_feeds'
-		},
 		delegateEvents : function(events) {
 			this.cid = 'live-feeds-view';
 			Backbone.View.prototype.delegateEvents.call(this, events);

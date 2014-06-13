@@ -4,7 +4,7 @@ define([ 'jQuery', 'backbone', 'socket', 'views/live_feeds/IndexFeed',
 			var IndexHome = Backbone.View.extend({
 				// el : $("#main-canvas"),
 				events : {
-					'click #perseus-feed' : 'listen_perseus_feeds'
+					'click #perseus-feed' : 'listen_perseus_feeds',
 				},
 				delegateEvents : function(events) {
 					this.cid = 'homepage-view';
@@ -18,6 +18,7 @@ define([ 'jQuery', 'backbone', 'socket', 'views/live_feeds/IndexFeed',
 				render : function(compiled_template) {
 					this.$el.html(compiled_template);
 				},
+				
 				listen_perseus_feeds : function() {
 					io = socket.connect("http://live-monitor.aldebaran");
 					if (io) {
@@ -25,7 +26,6 @@ define([ 'jQuery', 'backbone', 'socket', 'views/live_feeds/IndexFeed',
 						indexFeed = new indexFeed({el:$("#notification-section"),
 								container: this.container, model: liveFeedModel});
 						io.on('ui_live_feed', function(data) {
-							console.log('setting', data);
 							liveFeedModel.set('rawMessage', JSON.parse(data));
 							// console.log('We have data', data);
 //							 $('#notification-section').append(
