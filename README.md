@@ -90,7 +90,7 @@ If nginx is running and your browser can resolve http://live-monitor-client.alde
 ===================================================
 
 jvazquez@aldebaran:~$ redis-cli
-127.0.0.1:6379> publish php\_feed '{"msg": [{"x":1, "y":2}]}'
+127.0.0.1:6379> publish php_feed '{"msg": [{"x":1, "y":2}]}'
 (integer) 1
 
 
@@ -112,8 +112,8 @@ So far I don't see any way on how I can make nodejs have an on event for a key o
 so I have to click on something to view changes, and that doesnt' seems what I want to do
 on a live version of a log without coding a loop.
  
-### Disclaimer
-==============
+ ## Disclaimer
+ ==============
 
 It may not work, so just im me and I will see it.
 
@@ -122,6 +122,16 @@ FreeBSD with a jail (where it started) and a regular ubuntu box
 
 The steps for freebsd are a tad different, mostly due to tiny things like the real name for node is node, not "nodejs"
 
+## About Cors
+=============
+
+If you are having CORS issues, I've enabled the code to support cors issues, but you will need to configure the
+config.development.js 
+
+config.use\_origins = false;
+config.node\_origins = 'live-monitor-client.pollux.box';
+
+You will likely set the use\_origins to true and the node\_origins to the domain
 __npm__: Npm is used to install nodejs dependencies
 __bower__: Bower is used with grunt if you want for client side javascript depedencies
 

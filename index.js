@@ -2,11 +2,22 @@ var env = process.env.NODE_ENV || 'development';
 var cfg = require('./config.' + env);
 module.exports = cfg;
 var http = require('http').Server();
-var io = require('socket.io')(http);
+
+if(cfg.use_origins)
+{
+    var io = require('socket.io').listen(http, {origins: cfg.node_origins});
+    console.log(sprintf('Server running with CORS support.Withelisted %s/', cfg.node_origins));
+}
+else
+{
+	var io = require('socket.io')(http);
+//	var io = require('socket.io')(http);
+    console.log('Server running without CORS support');
+}
+
 var sprintf = require('sprintf').sprintf;
 var redis = require('redis');
 var redis_tunnel = redis.createClient();
-
 redis_tunnel.on('error', function(err) {
 	console.log('We had an error', err);
 });
@@ -29,7 +40,8 @@ io.on('connection', function(socket) {
 	});
 
 	redis_tunnel.on('message', function(channel, data) {
-		console.log('Sending to ', cfg.ui_channel, ' this message', data);
+		var message = sprintf("Sending to %s this message %s [%s]", cfg.ui_channel, data, channel);
+		console.log(message);
 		socket.emit(cfg.ui_channel, data);
 	});
 });
