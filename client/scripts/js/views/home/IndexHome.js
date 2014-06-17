@@ -18,14 +18,14 @@ define([ 'jQuery', 'backbone', 'socket', 'views/live_feeds/IndexFeed',
 					this.liveFeedModel = new liveFeedModel();
 					this.indexFeed = new indexFeed({el:$("#notification-section"),
 						container: this.container, model: this.liveFeedModel});
-					this.io = socket.connect("http://live-monitor.aldebaran");
+					this.io = socket.connect("http://live-monitor.pollux.box");
 				},
 				render : function(compiled_template) {
 					this.$el.html(compiled_template);
 				},
 				clean_feed_table:function(){
 					$('#notification-section').empty();
-          this.liveFeedModel.set('rawMessage', {"msg": "Awaiting new data.."});
+					this.liveFeedModel.set('rawMessage', {"msg": "Awaiting new data.."});
 				},
 				listen_perseus_feeds : function() {
 					if (this.io) {

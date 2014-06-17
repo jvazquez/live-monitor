@@ -2,6 +2,7 @@ var env = process.env.NODE_ENV || 'development';
 var cfg = require('./config.' + env);
 module.exports = cfg;
 var http = require('http').Server();
+var sprintf = require('sprintf').sprintf;
 
 if(cfg.use_origins)
 {
@@ -15,7 +16,6 @@ else
     console.log('Server running without CORS support');
 }
 
-var sprintf = require('sprintf').sprintf;
 var redis = require('redis');
 var redis_tunnel = redis.createClient();
 redis_tunnel.on('error', function(err) {
