@@ -1,8 +1,42 @@
 var env = process.env.NODE_ENV || 'development';
 var cfg = require('./config.' + env);
+var sprintf = require('sprintf').sprintf;
 module.exports = cfg;
-//var http = require('http').Server();
-var http = require('http');
+var http = require('http').Server();
+var querystring = require('querystring');
+
+if(cfg.enable_post_endpoint)
+{
+	http.on('request', function(request, response){
+		response.writeHead(200, "OK", {'Content-Type': 'application/json'});
+		response.write('{"msg": "I got your packet :D"}\n');
+	    response.end();
+		/*
+	    if(request.method == 'POST')
+	    {
+	        request.on('data', function(data) {
+	            queryData += data;
+	            // 1e6 === 1 * Math.pow(10, 6) === 1 * 1000000 ~~~ 1MB
+	            if(queryData.length > 1e6)
+	            {
+	                queryData = "";
+	                response.writeHead(413, {'Content-Type': 'text/plain'}).end();
+	                request.connection.destroy();
+	            }
+	        });
+
+	        request.on('end', function() {
+	            request.post = querystring.parse(queryData);
+//	            callback();
+	        });
+
+	    } else {
+	        response.writeHead(405, {'Content-Type': 'text/plain'});
+	        response.end();
+	    }
+	    */
+	});
+}
 
 /**
  * Cors support is handled by this directive
@@ -18,7 +52,6 @@ else
     console.log('Server running without CORS support');
 }
 
-var sprintf = require('sprintf').sprintf;
 var redis = require('redis');
 var redis_tunnel = redis.createClient();
 redis_tunnel.on('error', function(err) {

@@ -24,7 +24,7 @@ config.memcached_port = 11211;
 /**
  * Endpoints for your node server
  */
-config.enable_post = false;
+config.enable_post_endpoint = false;
 
 /**
  * General node settings
