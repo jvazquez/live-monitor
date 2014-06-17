@@ -22,6 +22,11 @@ config.memcached_host = 'localhost';
 config.memcached_port = 11211;
 
 /**
+ * Endpoints for your node server
+ */
+config.enable_post = false;
+
+/**
  * General node settings
  * Due to the fact that I guess that you will be running all in one single box
  * We will <strong>NOT</strong> use origins, because we won't restrict nobody

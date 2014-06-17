@@ -1,8 +1,12 @@
 var env = process.env.NODE_ENV || 'development';
 var cfg = require('./config.' + env);
 module.exports = cfg;
-var http = require('http').Server();
+//var http = require('http').Server();
+var http = require('http');
 
+/**
+ * Cors support is handled by this directive
+ */
 if(cfg.use_origins)
 {
     var io = require('socket.io').listen(http, {origins: cfg.node_origins});
@@ -11,7 +15,6 @@ if(cfg.use_origins)
 else
 {
 	var io = require('socket.io')(http);
-//	var io = require('socket.io')(http);
     console.log('Server running without CORS support');
 }
 
