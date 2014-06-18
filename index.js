@@ -1,17 +1,56 @@
 var env = process.env.NODE_ENV || 'development';
 var cfg = require('./config.' + env);
-var sprintf = require('sprintf').sprintf;
 module.exports = cfg;
+var sprintf = require('sprintf').sprintf;
 var http = require('http').Server();
-
+var path = require('path');
+var url = require('url');
+var port = process.argv[2]||cfg.port;
 var querystring = require('querystring');
+var fs = require("fs");
+
+var debug_message = '';
 
 if(cfg.enable_post_endpoint)
 {
 	http.on('request', function(request, response){
-		response.writeHead(200, "OK", {'Content-Type': 'application/json'});
-		response.write('{"msg": "I got your packet :D"}\n');
-	    response.end();
+		var requested_endpoint = url.parse(request.url);
+		debug_message = url.parse(request.url).pathname;
+		console.log(sprintf("The parsed url is %s", debug_message));
+		if(requested_endpoint.pathname=='/help/')
+		{
+			filename = path.join(process.cwd(), requested_endpoint.pathname, "help.json");
+			console.log(sprintf("I will try to open %s", filename));
+			fs.exists(filename, function(exists) {
+				if(!exists){
+					response.writeHead(404, {"Content-Type": "text/plain"});
+					response.write("404 Not Found (help message not found :O)\n");
+					response.end();
+					return;
+				}
+				
+//		    if (fs.statSync(filename).isDirectory()) filename += '/index.html';
+				
+				fs.readFile(filename, function(err, file) {
+					if(err) {        
+						response.writeHead(500, {"Content-Type": "text/plain"});
+						response.write(err + "\n");
+						response.end();
+						return;
+					}
+					
+					response.writeHead(200, {"Content-Type": "application/json"});
+					response.write(file);
+					response.end();
+				});
+			});
+		}
+		else
+		{
+			response.writeHead(200, "OK", {'Content-Type': 'application/json'});
+			response.write('{"msg": "I got your packet :D"}\n');
+		    response.end();
+		}
 		/*
 	    if(request.method == 'POST')
 	    {

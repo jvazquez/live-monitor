@@ -1,0 +1,10 @@
+{
+	"message": "Help section of mini node server",
+	"nice_messages": {
+		"ping": {
+			"description": "If you see an answer, it means that it is up",
+			"method": "GET"
+			"answers": "200 OK when it goes ok, 400 and above when something crashed or well, you get a timeout that means that the endpoint is dead"
+		}
+	}
+}
