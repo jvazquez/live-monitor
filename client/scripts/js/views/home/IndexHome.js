@@ -5,7 +5,8 @@ define([ 'jQuery', 'backbone', 'socket', 'views/live_feeds/IndexFeed',
 				// el : $("#main-canvas"),
 				events : {
 					'click #perseus-feed' : 'listen_perseus_feeds',
-					'click #clean-feed': 'clean_feed_table'
+					'click #clean-feed': 'clean_feed_table',
+					'click #perseus-messages': 'get_last_messages'
 				},
 				delegateEvents : function(events) {
 					this.cid = 'homepage-view';
@@ -30,13 +31,16 @@ define([ 'jQuery', 'backbone', 'socket', 'views/live_feeds/IndexFeed',
 				listen_perseus_feeds : function() {
 					if (this.io) {
 						self = this;
-            this.liveFeedModel.set('rawMessage', {"msg": "Listening perseus..."});
+						this.liveFeedModel.set('rawMessage', {"msg": "Listening perseus..."});
 						this.io.on('ui_live_feed', function(data) {
 							self.liveFeedModel.set('rawMessage', JSON.parse(data));
 						});
 					} else {
 						console.log('Socket not ready, sorry');
 					}
+				},
+				get_last_messages:function(){
+					
 				}
 			});
 			return IndexHome;
