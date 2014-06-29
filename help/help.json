@@ -3,8 +3,18 @@
 	"nice_messages": {
 		"ping": {
 			"description": "If you see an answer, it means that it is up",
-			"method": "GET"
+			"method": "GET",
 			"answers": "200 OK when it goes ok, 400 and above when something crashed or well, you get a timeout that means that the endpoint is dead"
+		},
+		"discover":{
+			"description": "Will show the available endpoints that we offer",
+			"method": "GET",
+			"answers": "200 OK on success, >400 on any other weird error"
+		},
+		"reception":{
+			"description": "Here we receive the messages and are deferred to be processed",
+			"method": "POST",
+			"answers": "200 OK on success, > 400 on any other error"
 		}
 	}
 }

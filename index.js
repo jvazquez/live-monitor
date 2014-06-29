@@ -7,29 +7,35 @@ var path = require('path');
 var url = require('url');
 var port = process.argv[2]||cfg.port;
 var querystring = require('querystring');
-var fs = require("fs");
-
+var fs = require('fs');
+var builder_module = require('./builder/index');
 var debug_message = '';
+module.exports = builder_module;
+var redis = require('redis');
+var redis_tunnel = redis.createClient();
+
+builder = builder_module.createPathBuilder();
 
 if(cfg.enable_post_endpoint)
 {
+  http.on('request', function(request, response){
+	  builder.process(request, response);
+  });
+/*
 	http.on('request', function(request, response){
 		var requested_endpoint = url.parse(request.url);
-		debug_message = url.parse(request.url).pathname;
-		console.log(sprintf("The parsed url is %s", debug_message));
-		if(requested_endpoint.pathname=='/help/')
+		pathname =  url.parse(request.url).pathname;
+		if(pathname=='/help/')
 		{
 			filename = path.join(process.cwd(), requested_endpoint.pathname, "help.json");
 			console.log(sprintf("I will try to open %s", filename));
-			fs.exists(filename, function(exists) {
+			fs.exists(filename, function(exists){
 				if(!exists){
 					response.writeHead(404, {"Content-Type": "text/plain"});
 					response.write("404 Not Found (help message not found :O)\n");
 					response.end();
 					return;
 				}
-				
-//		    if (fs.statSync(filename).isDirectory()) filename += '/index.html';
 				
 				fs.readFile(filename, function(err, file) {
 					if(err) {        
@@ -45,12 +51,17 @@ if(cfg.enable_post_endpoint)
 				});
 			});
 		}
+		else if(pathname=='message')
+		{
+			
+		}
 		else
 		{
 			response.writeHead(200, "OK", {'Content-Type': 'application/json'});
 			response.write('{"msg": "I got your packet :D"}\n');
 		    response.end();
 		}
+*/
 		/*
 	    if(request.method == 'POST')
 	    {
@@ -74,8 +85,8 @@ if(cfg.enable_post_endpoint)
 	        response.writeHead(405, {'Content-Type': 'text/plain'});
 	        response.end();
 	    }
-	    */
 	});
+		 */
 }
 
 /**
@@ -92,8 +103,6 @@ else
     console.log('Server running without CORS support');
 }
 
-var redis = require('redis');
-var redis_tunnel = redis.createClient();
 redis_tunnel.on('error', function(err) {
 	console.log('We had an error', err);
 });

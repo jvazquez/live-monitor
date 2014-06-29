@@ -1,0 +1,17 @@
+{
+  "name": "builder",
+  "version": "0.0.0",
+  "description": "Simple path helper",
+  "keywords": [
+    "path helper"
+  ],
+  "author": {
+    "name": "Jorge Vazquez",
+    "email": "jorgeomar.vazquez@gmail.com"
+  },
+  "main": "./index.js",
+  "scripts": {
+  },
+  "devDependencies": {
+  }
+}
