@@ -6,7 +6,7 @@ require.config({
 		"backbone" : "bower_components/backbone/backbone",
 		"underscore" : "bower_components/underscore/underscore",
 		"jQueryUi" : "bower_components/jqueryui/ui/minified/jquery-ui.min",
-		"socket" : "http://live-monitor.pollux.box/socket.io/socket.io",
+		"socket" : "http://live-monitor.aldebaran/socket.io/socket.io",
 		"json_human" : "bower_components/json-human/src/json.human",
 		"crel" : "bower_components/json-human/lib/crel",
 		"text" : "bower_components/requirejs-text/text",

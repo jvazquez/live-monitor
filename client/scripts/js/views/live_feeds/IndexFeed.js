@@ -16,7 +16,6 @@ define([ 'jQuery', 'backbone', 'json_human', 'models/live_feeds/LiveFeedModel',
 			this.redraw();
 		},
 		redraw: function(){
-			console.log('The model has', this.model.toJSON().rawMessage);
 			compiled_template = _.template(indexTemplate,
 					{
 						feed_data : JsonHuman.format(this.model.toJSON().rawMessage).innerHTML

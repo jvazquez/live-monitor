@@ -18,7 +18,7 @@ define([ 'jQuery', 'backbone', 'socket', 'views/live_feeds/IndexFeed',
 					this.liveFeedModel = new liveFeedModel();
 					this.indexFeed = new indexFeed({el:$("#notification-section"),
 						container: this.container, model: this.liveFeedModel});
-					this.io = socket.connect("http://live-monitor.pollux.box");
+					this.io = socket.connect("http://live-monitor.aldebaran");
 				},
 				render : function(compiled_template) {
 					this.$el.html(compiled_template);
