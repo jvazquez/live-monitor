@@ -6,6 +6,7 @@ config.env = 'development';
  */
 config.redis_host = 'localhost';
 config.redis_port = 6379;
+config.redis_channels = ['php_feed', 'debug_feed', 'python_feed']
 
 /**
  * Database engine

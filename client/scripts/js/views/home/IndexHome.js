@@ -5,12 +5,14 @@ define([ 'jQuery', 'backbone', 'socket', 'views/live_feeds/IndexFeed',
 				// el : $("#main-canvas"),
 				events : {
 					'click #perseus-feed' : 'listen_perseus_feeds',
-					'click #clean-feed': 'clean_feed_table'
+					'click #clean-feed': 'clean_feed_table',
+          'click #get-channels': 'get_channel_list'
 				},
 				delegateEvents : function(events) {
 					this.cid = 'homepage-view';
 					Backbone.View.prototype.delegateEvents.call(this, events);
 				},
+
 				initialize : function(opts) {
 					compiled_template = _.template(indexTemplate);
 					this.container = opts.container || {};
@@ -27,7 +29,7 @@ define([ 'jQuery', 'backbone', 'socket', 'views/live_feeds/IndexFeed',
 					$('#notification-section').empty();
 					this.liveFeedModel.set('rawMessage', {"msg": "Awaiting new data.."});
 				},
-				listen_perseus_feeds : function() {
+				listen_perseus_feeds : function(){
 					if (this.io) {
 						self = this;
             this.liveFeedModel.set('rawMessage', {"msg": "Listening perseus..."});
@@ -37,7 +39,20 @@ define([ 'jQuery', 'backbone', 'socket', 'views/live_feeds/IndexFeed',
 					} else {
 						console.log('Socket not ready, sorry');
 					}
-				}
+				},
+        get_channel_list:function(){
+          if (this.io){
+						self = this;
+						this.io.emit('get_channel_list');
+            this.io.on('channel_wire', function(data){
+              console.log("Got your channels back", data);
+						});
+					} else {
+						console.log("Sorry, but I can't fetch the channels");
+					}
+        }
 			});
+
+      
 			return IndexHome;
 		});

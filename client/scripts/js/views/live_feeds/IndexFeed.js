@@ -10,11 +10,13 @@ define([ 'jQuery', 'backbone', 'json_human', 'models/live_feeds/LiveFeedModel',
 			this.cid = 'live-feeds-view';
 			Backbone.View.prototype.delegateEvents.call(this, events);
 		},
+
 		initialize : function(opts) {
 			this.model = opts.model || new LiveFeedModel();
 			this.model.on('change', this.redraw, this);
 			this.redraw();
 		},
+
 		redraw: function(){
 			compiled_template = _.template(indexTemplate,
 					{
@@ -22,6 +24,7 @@ define([ 'jQuery', 'backbone', 'json_human', 'models/live_feeds/LiveFeedModel',
 					});
 			this.render(compiled_template);
 		},
+
 		render : function(compiled_template) {
 			if(this.$el.children().length==0){
 				this.$el.html(compiled_template);
@@ -30,5 +33,6 @@ define([ 'jQuery', 'backbone', 'json_human', 'models/live_feeds/LiveFeedModel',
 			}
 		}
 	});
+
 	return IndexFeed;
 });

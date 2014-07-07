@@ -6,4 +6,6 @@ config.use_origins = false;
 config.node_origins = 'live-monitor-client.pollux.box:80';//You may use *.* for what I see on Ariel's box, I didn't knew the CORS spec changed
 config.redis_channel = '';
 config.ui_channel = '';
+config.get_channels = 'get_channel_list';
+config.channel_wire = 'channel_wire';
 module.exports = config;

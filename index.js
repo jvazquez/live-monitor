@@ -3,6 +3,8 @@ var cfg = require('./config.' + env);
 module.exports = cfg;
 var http = require('http').Server();
 var sprintf = require('sprintf').sprintf;
+var redis = require('redis');
+var redis_tunnel = redis.createClient();
 
 if(cfg.use_origins)
 {
@@ -12,26 +14,29 @@ if(cfg.use_origins)
 else
 {
 	var io = require('socket.io')(http);
-//	var io = require('socket.io')(http);
-    console.log('Server running without CORS support');
+  console.log('Server running without CORS support');
 }
 
-var redis = require('redis');
-var redis_tunnel = redis.createClient();
+
 redis_tunnel.on('error', function(err) {
 	console.log('We had an error', err);
 });
 
-redis_tunnel.on('ready', function() {
-	msg = sprintf("Hooked up to redis channel:%s", cfg.redis_channel);
-	console.log(msg);
-	redis_tunnel.subscribe(cfg.redis_channel, function(count, chan) {
-		msg = sprintf("We have count:%s, channel:%s", count, chan);
-		console.log(msg);
-	});
+redis_tunnel.on('ready', function(){
+  cfg.redis_channels.forEach(function(channel, index){
+    redis_tunnel.subscribe(channel, function(count, chan){
+      var message = sprintf("Now listening on %s", chan);
+      console.log(message);
+	  });
+  });
 });
 
 io.on('connection', function(socket) {
+
+  socket.on(cfg.get_channels, function() {
+		socket.emit(cfg.channel_wire, cfg.redis_channels);
+	});
+
 	socket.on(cfg.ui_channel, function(data) {
 		redis_tunnel.subscribe(cfg.redis_channel, function(count, chann) {
 			console.log('Count is', count);
@@ -44,6 +49,7 @@ io.on('connection', function(socket) {
 		console.log(message);
 		socket.emit(cfg.ui_channel, data);
 	});
+
 });
 
 http.listen(cfg.port, function() {
