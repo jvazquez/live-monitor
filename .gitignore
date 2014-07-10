@@ -6,3 +6,4 @@ config.global.js
 config.production.js
 .project
 .settings
+site.js

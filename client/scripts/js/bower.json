@@ -25,6 +25,7 @@
     "requirejs": "~2.1.14",
     "requirejs-text": "~2.0.12",
     "jqueryui": "~1.10.4",
-    "json-human": "*"
+    "json-human": "*",
+    "sprintf": "~1.0.0"
   }
 }

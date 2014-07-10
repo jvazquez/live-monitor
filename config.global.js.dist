@@ -29,6 +29,7 @@ config.memcached_port = 11211;
  * on our local machines
  */
 config.port = 4000;
+config.port_rest = 4001;
 config.address = 'localhost';
 config.use_origins = false;
 config.node_origins = 'localhost';

@@ -1,16 +1,18 @@
 require.config({
 	baseUrl : "scripts/js",
 	paths : {
-		"bootstrap" : "bower_components/bootstrap/dist/js/bootstrap",
-		"jQuery" : "bower_components/jquery/dist/jquery.min",
-		"backbone" : "bower_components/backbone/backbone",
-		"underscore" : "bower_components/underscore/underscore",
-		"jQueryUi" : "bower_components/jqueryui/ui/minified/jquery-ui.min",
-		"socket" : "http://live-monitor.aldebaran/socket.io/socket.io",
-		"json_human" : "bower_components/json-human/src/json.human",
-		"crel" : "bower_components/json-human/lib/crel",
-		"text" : "bower_components/requirejs-text/text",
-		"templates" : "../templates"
+		bootstrap: "bower_components/bootstrap/dist/js/bootstrap",
+		jQuery: "bower_components/jquery/dist/jquery.min",
+		backbone: "bower_components/backbone/backbone",
+		underscore: "bower_components/underscore/underscore",
+		jQueryUi: "bower_components/jqueryui/ui/minified/jquery-ui.min",
+		socket: "http://live-monitor.aldebaran/socket.io/socket.io",
+		json_human: "bower_components/json-human/src/json.human",
+		crel: "bower_components/json-human/lib/crel",
+		text: "bower_components/requirejs-text/text",
+		templates: "../templates",
+    sprintf: 'bower_components/sprintf/dist/sprintf.min',
+    client_configuration: "configuration/site"
 	},
 	shim : {
 		bootstrap : {
