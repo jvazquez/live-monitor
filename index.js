@@ -44,5 +44,5 @@ io.on('connection', function(socket) {
 	});
 });
 
-server.listen(cfg.port, function(){console.log('listening on *:' + cfg.port);});
+http.listen(cfg.port, function(){console.log('listening on *:' + cfg.port);});
 console.log(sprintf('Server running at %s:%s/', cfg.host, cfg.port));
