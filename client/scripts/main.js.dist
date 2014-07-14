@@ -1,3 +1,10 @@
+/**
+ * README
+ * You need to complete the socket url with the full path to socket.io.js, for example
+ * If I host it on http://live-feeds.com/socket.io/socket.io.js
+ * I'd write something like socket: "http://live-feeds.com/socket.io/socket.io"
+ * No, is not an error that I did not put the .js in the end, requirejs does that for us
+ */
 require.config({
 	baseUrl : "scripts/js",
 	paths : {
@@ -6,7 +13,7 @@ require.config({
 		backbone: "bower_components/backbone/backbone",
 		underscore: "bower_components/underscore/underscore",
 		jQueryUi: "bower_components/jqueryui/ui/minified/jquery-ui.min",
-		socket: "http://live-monitor.aldebaran/socket.io/socket.io",
+		socket: "http://complete/socket.io/socket.io",
 		json_human: "bower_components/json-human/src/json.human",
 		crel: "bower_components/json-human/lib/crel",
 		text: "bower_components/requirejs-text/text",

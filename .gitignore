@@ -7,3 +7,4 @@ config.production.js
 .project
 .settings
 site.js
+main.js
