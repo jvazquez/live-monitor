@@ -4,7 +4,13 @@ var sprintf = require('sprintf').sprintf;
 var redis = require('redis');
 var redis_tunnel = redis.createClient();
 
+redis_tunnel.on('error', function(err) {
+  var message = sprintf("We had an error on redis tunnel:%s", err);
+	console.log(message);
+});
+
 exports.stream_redis = function (configuration){
+
   if(configuration.use_origins)
   {
       var io = require('socket.io').listen(http, {origins: configuration.node_origins});
@@ -15,7 +21,6 @@ exports.stream_redis = function (configuration){
     var io = require('socket.io')(http);
     console.log('Server running without CORS support');
   }
-
 
   redis_tunnel.on('error', function(err) {
     console.log('We had an error', err);
@@ -42,6 +47,6 @@ exports.stream_redis = function (configuration){
     });
   });
 
-  http.listen(configuration.port);
+  http.listen(configuration.port, configuration.host);
   console.log(sprintf('Socket.io running at %s:%s/', configuration.host, configuration.port));
 };
