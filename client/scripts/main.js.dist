@@ -58,11 +58,4 @@ requirejs([ 'jQuery', 'bootstrap', 'backbone', 'jQueryUi', 'router',
 			el : $('#main-canvas')
 		})
 	});
-	/*
-	 * $('#perseus-feed').click(function(){ $('#target-feed').empty();
-	 * $('#target-feed').append('Watching ' + $(this).data('name')); });
-	 * 
-	 * $('#clean-feed').click(function(){ $('#notification-section').empty();
-	 * });
-	 */
 });
