@@ -10,11 +10,17 @@ exports.rest_endpoint = function(configuration){
  server.on('request', function(request, response){
  	var pathname = url.parse(request.url).pathname;
   var method = request.method;
-  console.log(sprintf("Pathname:%s , method:%s", pathname, method));
+  var message = sprintf("Got a request for %s with method %s", pathname, method);
+  console.log(message);
   if(method=='GET' && pathname=='/channel/')
   {
-    response.writeHead(200, {'Content-Length': 'ok'.length, 'Content-Type': 'text/plain'});
-    response.write('ok\n');
+    var custom = [];
+    configuration.redis_channels.forEach(function(channel, index){
+      custom.push({'id': index, 'name': channel});
+    });
+    var the_channels = JSON.stringify(custom);
+    response.writeHead(200, {'Content-Length': the_channels.length, 'Content-Type': 'application/json'});
+    response.write(the_channels);
     response.end();
   }
   else

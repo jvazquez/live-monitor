@@ -1,17 +1,17 @@
 define(['jQuery', 'backbone', 'socket', 'client_configuration',
     'views/live_feeds/IndexFeed', 'models/live_feeds/LiveFeedModel',
-    'models/channels/ChannelModel', 'text!templates/home/index.html' ],
-		function($, Backbone, socket, client_configuration, indexFeed,
-      liveFeedModel, channelModel, indexTemplate) {
-			var IndexHome = Backbone.View.extend({
-				// el : $("#main-canvas"),
-				events : {
+    'models/channels/ChannelModel', 'collections/channels/ChannelsCollection',
+    'text!templates/home/index.html'],
+  function($, Backbone, socket, client_configuration, indexFeed,
+    liveFeedModel, channelModel, ChannelsCollection, indexTemplate) {
+		var IndexHome = Backbone.View.extend({
+				events:{
 					'click #perseus-feed' : 'listen_perseus_feeds',
 					'click #clean-feed': 'clean_feed_table',
           'click #get-channels': 'get_channel_list'
 				},
 
-				delegateEvents : function(events) {
+				delegateEvents: function(events){
 					this.cid = 'homepage-view';
 					Backbone.View.prototype.delegateEvents.call(this, events);
 				},
@@ -33,7 +33,7 @@ define(['jQuery', 'backbone', 'socket', 'client_configuration',
 					this.liveFeedModel.set('rawMessage', {"msg": "Awaiting new data.."});
 				},
 				listen_perseus_feeds: function(){
-					if (this.io) {
+					if (this.io){
 						self = this;
             this.liveFeedModel.set('rawMessage', {"msg": "Listening perseus..."});
 						this.io.on('ui_live_feed', function(data) {
@@ -45,7 +45,13 @@ define(['jQuery', 'backbone', 'socket', 'client_configuration',
 				},
         get_channel_list:function(){
           var channels = new channelModel();
-          channels.fetch();
+          $.when(channels.fetch())
+            .done(function(response){
+              console.log(channels.toJSON());
+            })
+            .fail(function(response){
+              console.log("This constitutes an error", response);
+            });
         }
 			});
 			return IndexHome;
