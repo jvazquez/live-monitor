@@ -33,4 +33,7 @@ config.port_rest = 4001;
 config.address = 'localhost';
 config.use_origins = false;
 config.node_origins = 'localhost';
+config.use_socketio = true;
+config.use_http = true;
+
 module.exports = config;
