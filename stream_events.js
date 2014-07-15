@@ -42,8 +42,11 @@ exports.stream_redis = function (configuration){
       });
     });
     redis_tunnel.on('message', function(channel, data) {
-      var message = sprintf("Sending to %s this message %s [%s]", configuration.ui_channel, data, channel);
-      socket.emit(configuration.ui_channel, data);
+      //TODO Configure this and provide better configuration
+      var composed_channel_name = sprintf("ui_live_feed_%s", channel);
+      var message = sprintf("Sending to %s this message %s [%s]", composed_channel_name, data, channel);
+      console.log(message);
+      socket.emit(composed_channel_name, data);
     });
   });
 

@@ -63,8 +63,17 @@ liveFeedModel, channelModel, ChannelsCollection, indexTemplate){
           {
             if (this.io){
 						  self = this;
-              this.liveFeedModel.set('rawMessage', {"msg": "Listening perseus..."});
-						  this.io.on('ui_live_feed', function(data) {
+              var composed_name = "ui_live_feed_" + channel_to_follow;
+              this.liveFeedModel.set('rawMessage', {"msg": "Listening on " + composed_name});
+              that = this;
+              $("#channel-list > option").each(function(){
+                console.log('Removing from', this.id);
+                that.io.removeListener(this.id, function(data){
+                  console.log("This is data", data);
+                });
+              });
+              console.log("Composed name will be ", composed_name);
+						  this.io.on(composed_name, function(data) {
 							  self.liveFeedModel.set('rawMessage', JSON.parse(data));
 						  });
 					  }else{
