@@ -8,4 +8,5 @@ config.redis_channel = '';
 config.ui_channel = '';
 config.get_channels = 'get_channel_list';
 config.channel_wire = 'channel_wire';
+config.channels = ['live_feed', 'debug_live_feed', 'php_feed'];
 module.exports = config;
